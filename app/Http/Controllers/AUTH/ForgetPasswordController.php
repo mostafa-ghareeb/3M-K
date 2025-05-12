@@ -15,6 +15,11 @@ class ForgetPasswordController extends Controller
         ]);
 
         $user = User::where('email' , $request->email)->first();
+        if(!$user){
+            return response()->json([
+                'data' => 'this email is not correct'
+            ],401);
+        }
         $user->notify(new ResetPasswordVerificationNotification());
         return response()->json([
             'data' => 'code have been sended'

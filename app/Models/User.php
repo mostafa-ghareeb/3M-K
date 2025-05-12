@@ -58,4 +58,8 @@ class User extends Authenticatable
     public function getImageUrlAttribute(){
         return Storage::disk('userimage')->url($this->image);
     }
+
+    public function cart(){
+        return $this->hasOne(Cart::class);
+    }
 }

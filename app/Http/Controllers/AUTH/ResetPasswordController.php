@@ -23,6 +23,7 @@ class ResetPasswordController extends Controller
             'password' => [
                 'required',
                 'min:8',
+                'confirmed',    
                 'regex:/[a-z]/',
                 'regex:/[A-Z]/',
                 'regex:/[0-9]/',

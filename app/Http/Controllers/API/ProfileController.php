@@ -21,28 +21,38 @@ class ProfileController extends Controller
         }
         return response()->json([
             'user'=>$user,
-            'image url' =>asset($user->image),
+            'image url' =>'https://concise-ant-sound.ngrok-free.app/'.$user->image,
             'addresses'=>$user->addresses()
         ],200);
     }
 
     public function update_user(Request $request){
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'phone' => 'required|string|regex:/^[0-9]{11}$/|unique:users,phone,'.$request->user()->id,
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'gender' => 'required|string|in:male,female,other',
+            'name' => 'string|max:255',
+            'phone' => 'string|regex:/^[0-9]{11}$/|unique:users,phone,'.$request->user()->id,
+            'image' => 'image|mimes:jpeg,png,jpg,gif,avif|max:20480',
+            'gender' => 'string|in:male,female,other',
         ]);
         
         $user = $request->user();
         if($request->hasFile('image')){
             $image = $request->file('image')->getClientOriginalName();
-            $path = $request->file('image')->storeAs('usersphoto' , $image , 'userimage');
+            $cleanedName = str_replace(' ', '_', $image);
+            $filename = time() . '_' . $cleanedName;
+            $path = $request->file('image')->storeAs('usersphoto' , $filename , 'userimage');
         }
-        $user->name = $validatedData['name'];
-        $user->phone = $validatedData['phone'];
-        $user->image ='usersimages/'.$path;
-        $user->gender = $validatedData['gender'];
+        if( !empty($validatedData['name'])){
+            $user->name = $validatedData['name'];
+        }
+        if(!empty($validatedData['phone'])){
+            $user->phone = $validatedData['phone'];
+        }
+        if ($request->hasFile('image')) {
+            $user->image ='usersimages/'.$path;
+        }
+        if(!empty($validatedData['gender'])){
+            $user->gender = $validatedData['gender'];
+        }
         $user->save();
         return response()->json([
             'user'=>$user,
@@ -50,3 +60,4 @@ class ProfileController extends Controller
         ],200);
     }
 }
+
