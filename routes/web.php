@@ -10,9 +10,11 @@ use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
+//admin dashboard with larevel
 Route::get('/', function () {
     return view('auth.login');
 });
+
 
 Route::get('/dashboard', function () {
     $products = Product::all();

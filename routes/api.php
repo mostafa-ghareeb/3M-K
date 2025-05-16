@@ -29,6 +29,8 @@ use Laravel\Socialite\Facades\Socialite;
 //     return $request->user();
 // })->middleware('auth:sanctum');
 
+//app api
+
 //Auth
 Route::post('/register' , [AuthController::class , 'register']);
 Route::post('/login' , [AuthController::class , 'login']);
@@ -97,7 +99,6 @@ Route::delete('/dalete/rate/{rate_id}' , [RateController::class,'delete_rate'])-
 Route::put('/update/rate/{rate}' , [RateController::class,'update_rate'])->middleware('auth:sanctum');
 
 //payment
-
 Route::post('/payment/{order}' , [PaymentOrderController::class , 'verifyPayment'])->middleware('auth:sanctum');
 
 Route::post('/send/mail' , [MailController::class , 'sendmail'])->middleware('auth:sanctum');

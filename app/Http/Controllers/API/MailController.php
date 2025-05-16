@@ -1,5 +1,5 @@
 <?php
-
+//check the mail is done right
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
