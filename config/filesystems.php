@@ -45,6 +45,7 @@ return [
             'throw' => false,
         ],
 
+        //add here users images
         'userimage' => [
             'driver' => 'local',
             'root' => public_path('usersimages'),

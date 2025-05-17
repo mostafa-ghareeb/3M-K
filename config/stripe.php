@@ -1,4 +1,5 @@
 <?php
+//stripe config
 return [
     'api_key' => [
         'key' => env('STRIPE_KEY'),
