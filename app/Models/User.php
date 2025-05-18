@@ -50,7 +50,7 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-
+    //relation with address one to many
     public function addresses(){
         return $this->hasMany(Address::class);
     }

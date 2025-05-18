@@ -23,10 +23,12 @@ class Product extends Model
         'Price', 'ProductBrandId', 'ProductTypeId', 'Quantity' , 'isFav' , 'isLike'
     ];
 
+    //relation with cart one to many
     public function cart(){
         return $this->hasMany(Cart::class);
     }
 
+    //relation with order_detail one to many
     public function order_detail(){
         return $this->hasMany(OrderDetail::class);
     }
